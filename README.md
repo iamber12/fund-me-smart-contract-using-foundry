@@ -83,7 +83,7 @@ We mainly focus on unit and integration test in this project.
   forge snapshot
   ```
 
-## Implementing UI
+## Application
 An application of this smart contract would look something like this-
 
 ![Local Image](Screenshots/FundMe_UI.png)
