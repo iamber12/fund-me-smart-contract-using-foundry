@@ -1,66 +1,92 @@
-## Foundry
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+# Fund Me Smart Contract Using Foundry
+This project demonstrates a Fund Me smart contract, allowing the owner to deploy a contract to initiate a fundraiser and securely withdraw the raised funds.
 
-Foundry consists of:
+## Prerequistes
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+- **[Foundry Installation](https://book.getfoundry.sh/getting-started/installation)**:
+  Foundry is a prerequisite. Install it using the following script -
+  ```bash
+   curl -L https://foundry.paradigm.xyz | bash
+   ```
+- **[Metamask](https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn)**
+MetaMask is a software cryptocurrency wallet used to interact with the Ethereum blockchain. It allows users to access their Ethereum wallet through a browser extension or mobile app, which can then be used to interact with decentralized applications.
 
-## Documentation
+## Getting Things Ready
+Execute the ensuing steps to prepare the project environment:
 
-https://book.getfoundry.sh/
+1. **Clone the Repository**:
+   Attain your local copy with:
+   ```bash
+   git clone https://github.com/iamber12/fund-me-smart-contract-using-foundry
+   ```
 
-## Usage
+2. **Compile the Project**:
+   Build the project using foundry:
+   ```bash
+   forge build
+   ```
 
-### Build
+## Deployment
 
-```shell
-$ forge build
-```
+### Anvil Local Chain Deployment
 
-### Test
+- For local testnet emulation, deploy using:
+  ```bash
+  forge script script/DeployFundMe.s.sol
+  ```
 
-```shell
-$ forge test
-```
+### Real-world Testnet/Mainnet Deployment
+For this you will need two things as prerequiste - 
+    - PRIVATE_KEY: Your metamask account's private key.
+    - SEPOLIA_RPC_URL: The URL of the Sepolia testnet node you're using. You can obtain a free setup of one through Alchemy.
 
-### Format
+#### Initiate Deployment
 
-```shell
-$ forge fmt
-```
+- Proceed with contract deployment using:
+  ```bash
+  forge script script/DeployFundMe.s.sol --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --broadcast
+  ```
 
-### Gas Snapshots
+## Testing
+We mainly focus on unit and integration test in this project.
+### Running all the tests
 
-```shell
-$ forge snapshot
-```
+- In order to run all the tests, use the following command:
+  ```bash
+  forge test
+  ```
 
-### Anvil
+### Running a specific test
 
-```shell
-$ anvil
-```
+- In order to run a specific test, use the following command:
+  ```bash
+  forge test --mt <function_name>
+  ```
 
-### Deploy
+### Fork-based Sepolia Testnet Analysis
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+- To conduct tests on a Sepolia network fork, use:
+  ```bash
+  forge test --fork-url $SEPOLIA_RPC_URL
+  ```
 
-### Cast
+- For an overview of test coverage, execute:
+  ```bash
+  forge coverage
+  ```
 
-```shell
-$ cast <subcommand>
-```
+## Gas Usage Synopsis
 
-### Help
+- To get an overview of the gas usage, use the following command:
+  ```bash
+  forge snapshot
+  ```
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+## Implementing UI
+An application of this smart contract would look something like this-
+
+![Local Image](Screenshots/FundMe_UI.png)
+
+
+Thanks to [Cyfrin](https://www.cyfrin.io/). You can find one such implementation in this [repo](https://github.com/Cyfrin/html-fund-me-f23).
